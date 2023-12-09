@@ -74,13 +74,6 @@ connection.connect((err) => {
         ('Jane Doe', 'Homo Sapien', 'Female', 'Unknown', 'Earth', 'jane_doe.jpg', '2099', 'Unknown', '', '2023-12-04T12:38:03.691Z')
         `
 
-        // const insertDataQuery = `
-        //   INSERT INTO users (name, email) VALUES
-        //     ('John Doe', 'john@example.com'),
-        //     ('Jane Doe', 'jane@example.com'),
-        //     ('Bob Smith', 'bob@example.com')
-        // `;
-
         // Execute the query to insert data
         connection.query(insertDataQuery, (insertDataError, insertDataResults) => {
           if (insertDataError) {
