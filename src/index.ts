@@ -19,7 +19,7 @@ app.get('/', async (req, res) => {
 // get all IIDs
 app.get(`/${FROM_WHERE}`, async (req, res) => {
   // Execute the query to get all users
-  connection.query('SELECT * FROM iids', (error, results) => {
+  connection.query(`SELECT * FROM ${FROM_WHERE}`, (error, results) => {
     if (error) {
       res.status(500).json({ error: 'Internal Server Error' });
       return;
@@ -39,7 +39,7 @@ app.get(`/${FROM_WHERE}/:id`, async (req, res) => {
     res.status(404).json({error: 'Invalid Id'});
   }
   // Execute the query to get all users 
-  connection.query('SELECT * FROM iids WHERE id=?', getById, (error, results:RowDataPacket[]) => {
+  connection.query(`SELECT * FROM ${FROM_WHERE} WHERE id=?`, getById, (error, results:RowDataPacket[]) => {
     if (error) {
       res.status(500).json({ error: 'Internal Server Error' });
       return;
@@ -54,7 +54,7 @@ app.get(`/${FROM_WHERE}/:id`, async (req, res) => {
 app.delete(`/${FROM_WHERE}/:id`, async (req, res) => {
   const removeById = req.params.id;
   
-  connection.query('DELETE FROM iids WHERE id=?', removeById, (error, results:OkPacket) => {
+  connection.query(`DELETE FROM ${FROM_WHERE} WHERE id=?`, removeById, (error, results:OkPacket) => {
     if (error) {
       res.status(500).json({ error: 'Internal Server Error' });
       return;
@@ -74,7 +74,7 @@ app.put(`/${FROM_WHERE}/:id`, async (req, res) => {
   const removeById = req.params.id;
   const data = req.body;
   
-  connection.query('UPDATE iids SET ? WHERE id=?', [data, removeById], (error, results:OkPacket) => {
+  connection.query(`UPDATE ${FROM_WHERE} SET ? WHERE id=?`, [data, removeById], (error, results:OkPacket) => {
     if (error) {
       res.status(500).json({ error: 'Internal Server Error' });
       return;
@@ -94,7 +94,7 @@ app.put(`/${FROM_WHERE}/:id`, async (req, res) => {
 app.post(`/${FROM_WHERE}/:id`, async (req, res) => {
   const { name, species, sex, occupation, origin, pfp, birth_year, status, description, createdAt } = req.body;
 
-  connection.query(`INSERT INTO iids (name, species, sex, occupation, origin, pfp, birth_year, status, description, createdAt) 
+  connection.query(`INSERT INTO ${FROM_WHERE} (name, species, sex, occupation, origin, pfp, birth_year, status, description, createdAt) 
     VALUES ('${name}', '${species}', '${sex}', '${occupation}', '${origin}', '${pfp}', '${birth_year}', '${status}', '${description}', '${createdAt}')`, 
     (error, results:OkPacket) => {
     if (error) {
