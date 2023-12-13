@@ -91,7 +91,7 @@ app.put(`/${FROM_WHERE}/:id`, async (req, res) => {
 
 
 // Add to IIDs
-app.post(`/${FROM_WHERE}/:id`, async (req, res) => {
+app.post(`/${FROM_WHERE}`, async (req, res) => {
   const { name, species, sex, occupation, origin, pfp, birth_year, status, description, createdAt } = req.body;
 
   connection.query(`INSERT INTO ${FROM_WHERE} (name, species, sex, occupation, origin, pfp, birth_year, status, description, createdAt) 
